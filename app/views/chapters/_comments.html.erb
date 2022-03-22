@@ -1,0 +1,27 @@
+<div class="two-third last">
+	<div class="comments-header">
+	    <h3>Chapter Comments</h3>
+	</div>
+
+	<% if current_user  && @chapter.published %>
+
+		<%= form_for @comment, :url => { :controller => "chapters", :action => "create_comment"} do |f| %>
+		        <%= f.hidden_field :user_id, :value => current_user.id %>
+				Title: <%= f.text_field :title %><br>
+				Comment:<br />
+				<%= f.text_area :body, :rows => 3 %>
+		<div class="actions">
+		    <%= f.submit "Submit Comment", :class => "button small round blue" %>
+		</div>
+		<% end %>
+	<% end %>
+
+	<% if @chapter.published  %>
+	<div id="comments">
+		<% for comment in @chapter_comments %>
+		    <div class="div-line"></div>
+		    <%= nested_comments comment.subtree.arrange(:order => :created_at) %>
+		<% end %>
+	</div>
+    <% end %>
+</div>

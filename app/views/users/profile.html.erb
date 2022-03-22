@@ -1,0 +1,111 @@
+
+<div class="one">
+	    <p>Member Profile Information
+		<% if @user == current_user %>
+			  <%= link_to '(edit)', user_path(@user), :class => "more-link" %>
+		<% end %> 
+		</p>
+	
+        <h2>  <%= @user.name %>  </h2>
+	<div class="one-half">
+		<p><strong>Biography/Background:</strong><br /> <%= @user.bio %>
+    </div>
+    <div class="one-half last">
+        <p><strong>Blog or web page:</strong>  <a href="<%= @user.blog_url %>" target="_blank"><%= @user.blog_url %></a> </p>
+		<p><strong>Activity Score:</strong>  <%= @user.activity_score %></p>
+		<p><strong>Popularity Score:</strong>  <%= @user.popularity_score %></p>
+	</div>
+</div>
+
+<div class="one" ><div class="div-line"></div><div class="div-space-20"> &nbsp; </div></div>
+
+<div class="one">
+    <div class="one-half">
+    <p><strong>Story Ideas Created by <%= @user_name %></strong></p>
+   	<%= paginate @stories %>
+    <ul>
+    <% @stories.each do |story| %>
+        <div class="div-line"></div>
+        <li><%= link_to story.title, story %> ( <%= story.activity.to_s %>)
+	    <% if @the_current_user.can? :update, story %>
+	        <%= link_to "  (edit)", edit_story_path(story), :class => "more-link" %>
+	    <% end %>
+	    </li>
+    <% end %>
+    <div class="div-line"></div>
+    </ul>
+	<%= paginate @stories %>
+    </div>
+
+	<div class="one-half last">
+    <% if !@unpublished_stories.empty? %>
+    <p><strong>Story Ideas You Have Not Yet Published </strong></p>
+    <ul>
+        <% @unpublished_stories.each do |story| %>
+        <div class="div-line"></div>
+        <li><%= link_to story.title, story %> <%= link_to "  (edit)", edit_story_path(story), :class => "more-link" %> </li>
+        <% end %>
+        <div class="div-line"></div>
+    </ul>
+    <% end %>
+    </div>
+
+
+</div>
+
+<div class="one" ><div class="div-line"></div><div class="div-space-20"> &nbsp; </div></div>
+
+<div class="one">
+	
+	<div class="one-half">
+        <p><strong>Chapters Written by <%= @user_name %></strong></p>
+        <ul>
+            <% @chapters.each do |chapter| %>
+           <div class="div-line"></div>
+            <li><%= link_to chapter.heading, chapter %> (<%= chapter.vote_cnt.to_s %>)
+                <% if @the_current_user.can? :update, chapter %>
+	              <%= link_to "  (edit) ", edit_chapter_path(chapter), :class => "more-link" %>
+	            <% end %><br /> 
+	        <div class="link-small">
+	            &nbsp;&nbsp;&nbsp;&nbsp;Story: <%= link_to chapter.story.title, chapter.story %>
+	        </div>
+	        </li>
+            <% end %>
+            <div class="div-line"></div>
+        </ul>
+        <%= paginate @chapters %>
+    </div>
+
+	<div class="one-half last">
+        <% if !@unpublished_chapters.empty? %>
+        <p><strong>Chapters You Have Not Yet Published</strong></p>
+        <ul>
+            <% @unpublished_chapters.each do |chapter| %>
+            <div class="div-line"></div>
+            <li><%= link_to chapter.heading, chapter %>
+                <% if @the_current_user.can? :update, chapter %>
+	              <%= link_to "  (edit) ", edit_chapter_path(chapter), :class => "more-link" %>
+	            <% end %><br /> 
+	        <div class="link-small">
+	            &nbsp;&nbsp;&nbsp;&nbsp;Story: <%= link_to chapter.story.title, chapter.story %>
+	        </div>
+	        </li>
+            <% end %>
+            <div class="div-line"></div>
+        </ul>
+        <% end %>
+    </div>
+
+
+
+  <div class="one">
+	<% if @user == current_user %>
+	<div class="one-half">
+		<%= render "tracks" %>
+    </div>
+	<% end %> 
+  </div>
+
+</div>
+
+

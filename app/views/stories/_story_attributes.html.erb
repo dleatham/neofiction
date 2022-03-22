@@ -1,0 +1,29 @@
+<p>
+  <strong>Story Idea by:</strong>
+  <%= link_to @story.user.name, user_profile_path(@story.user) %>
+</p>
+<p>
+  <strong>Genre:</strong>
+  <%= @story.genre.title_extended %>
+</p>
+<p>
+  <strong>Activity Score:</strong>
+  <%= @story.activity %>
+</p>
+
+<p>
+  <strong>Total Chapters:</strong>
+  <%= @chapter_count %>
+</p>
+
+
+<% if @story.published %>
+	<div class="social-links">
+	    <div class="fb-like" data-href="<%= request.url   %>" data-layout="button_count"
+	                         data-send="false" data-width="50" data-show-faces="false" data-font="tahoma">
+	    </div>
+	    <a href="https://twitter.com/share" class="twitter-share-button" 
+	                                        data-url="<%= request.url   %>" data-lang="en">Tweet</a>
+	    <div class="g-plusone" data-size="small"></div>
+    </div>
+<% end %>

@@ -1,0 +1,34 @@
+<h3>Most Active/Popular Stories</h3>
+
+<div class="three-fourth last">
+
+<p>These are the most active and/or popular story ideas created on the neoFICTION site.  Find out what makes these stories so popular, garnering the most chapter writing, commenting, and voting activities! </p>
+
+<div class="story-list">
+	
+	<table>
+	  <tr>
+	    <th>Title</th>
+	    <th>Story Creator</th>
+	    <th>Author's Introduction</th>
+		<th>First Chapter</th>
+	    <th>Activity Score:</th>
+	  </tr>
+
+	<% @active_stories.each do |story| %>
+	<tr>
+	  <td><%= link_to story.title, chapter_path( story.most_pop_chapter(current_user)  ) %></td>
+	  <td><%= link_to story.user.name, user_profile_path( story.user ) %></td>
+	  <td><%= simple_format story.desc.truncate(200, :separator => ' ') %></td>
+	  <td><%= simple_format story.first_chapters.find(:first).chapter.body.truncate(200, :separator => ' ') %></td>
+	  <td><%= story.activity %></td>
+	</tr>
+	<% end  %>
+	</table>
+	
+	
+</div>
+
+
+<%= paginate @active_stories, :param_name => 'active_page'%>
+</div>

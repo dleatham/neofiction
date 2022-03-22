@@ -1,0 +1,15 @@
+
+<div class="creator-intro">
+	  <h4>Story Idea - Introduction and Guidance</h4>
+	  <%= simple_format @story.desc %>
+</div>
+<% if (current_user)  && (current_user.can?(:edit, @story)) %>
+<br />
+<%= link_to "Edit Story Information", edit_story_path(@story) %> 
+<% end %>
+
+<% if (current_user) && (!@story.published) && (current_user.can?(:destroy, @story))  %>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<%= link_to "Delete This Story Permanently", @story, 	confirm: 'Are you sure you want to delete this Story Idea and its first chapter?', method: :delete %> 
+<% end %>
+<br />

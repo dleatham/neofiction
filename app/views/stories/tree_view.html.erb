@@ -1,0 +1,29 @@
+
+<script type="text/javascript" src="http://static.jstree.com/v.1.0pre/jquery.jstree.js"></script>
+<%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/blitzer/jquery-ui.css" %>
+
+<h3><%= @story.title %></h5>
+
+<h5>Using the themes plugin</h3>
+
+<div id="story_tree_list">
+<% @root_chapter_subtrees.each do |root_chapter_subtrees|%>
+    <ul>
+        <%= show_story_tree( root_chapter_subtrees ) %>
+    </ul>
+<% end %>
+</div>
+
+<script type="text/javascript" class="source">
+
+
+$(function () {
+	$("#story_tree_list").jstree({ 
+		"plugins" : [ "html_data",  "themeroller" ]
+	}).bind("loaded.jstree", function (e, data) { data.inst.open_all(-1); })
+});
+
+
+</script>
+
+

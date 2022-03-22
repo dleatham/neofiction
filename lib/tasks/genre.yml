@@ -1,0 +1,16 @@
+children:
+    title:Children's Literature
+    desc:Designed for children up to 12 years of age.
+        
+youth:
+    title:Young Adult Literature
+    desc:Designed for children and young adults up 12 years of age and older.
+        
+fan:
+    title:Fan Fiction
+    desc:A wide range of fiction based on the writings of fans of popular works.
+
+mystry:
+    title:Mysteries
+    desc:Fiction focused on solving a wide range of mysteries.
+    

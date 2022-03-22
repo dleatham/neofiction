@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: Story01 Title
+  desc: Story01 Desc
+  activity: 20
+
+two:
+  title: Story02 Title
+  desc: Story02 Desc
+  activity: 30

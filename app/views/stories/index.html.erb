@@ -1,0 +1,25 @@
+
+<h3>All Stories</h3>
+
+<%= paginate @stories %>
+
+<div id="story_table">
+	<table class="listing">
+	  <tr>
+	    <th>Story Title</th>
+	    <th>Author's Description</th>
+	    <th>Activity Score </th>
+	  </tr>
+	  <% for story in @stories %>
+	    <% if story.most_pop_chapter %>
+		    <tr>
+		      <td><%= link_to story.title, chapter_path( story.most_pop_chapter(current_user)  ) %></td>
+		      <td><%= simple_format story.desc %></td>
+		      <td><%= story.activity %></td>
+		    </tr>
+		<% end %>
+	  <% end %>
+	</table>
+</div>
+<%= paginate @stories %>
+

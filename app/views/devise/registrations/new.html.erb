@@ -1,0 +1,43 @@
+<h2>Sign up</h2>
+
+<p>
+	To sign up for an account at neoFICTION please complete the form below.
+</p><br />
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= devise_error_messages! %>
+
+
+  <div><%= f.label :email %>
+  <%= f.email_field :email %></div><br />
+
+  <div><%= f.label :name %>
+  <%= f.text_field :name %></div><br />
+
+  <div><%= f.label :password %>
+  <%= f.password_field :password %></div><br />
+
+  <div><%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %></div><br />
+
+  <% if params[:initial_role] == "reader" %>
+    <%= hidden_field_tag "user[roles][]", :reader %>
+  <% elsif params[:initial_role] == "writer" %>
+    <%= hidden_field_tag "user[roles][]", :writer %>
+  <% elsif params[:initial_role] == "author" %>
+    <%= hidden_field_tag "user[roles][]", :author %>
+  <% elsif params[:initial_role] == "admin" %>
+    <%= hidden_field_tag "user[roles][]", :admin %>
+  <% else %>
+    <%= hidden_field_tag "user[roles][]", :reader %>
+  <% end %>
+
+  <br />
+
+<br>
+  <div><%= f.submit "Sign up" %></div>
+<% end %>
+
+<br>
+
+<%= render :partial => "devise/shared/links" %>

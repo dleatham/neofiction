@@ -1,0 +1,43 @@
+<div class="two-third last">
+	<div class="textbox-shadow">
+		  <%= simple_format @chapter.body %>
+    </div>
+</div>
+
+<div class="one-third">
+		    <% if @chapter.published %>
+		        <%= render "votes"%>
+		        <% if current_user %>
+		          <%= track_options( current_user, @chapter ) %>
+		        <% end %>
+		 	<% end %>
+</div>		
+
+<div class="one-third last">	
+	<% if @chapter.published %>
+		<div class="social-links">
+		    <div class="fb-like" data-href="<%= request.url   %>" data-layout="button_count"
+		                         data-send="false" data-width="50" data-show-faces="false" data-font="tahoma">
+		    </div>
+		    <a href="https://twitter.com/share" class="twitter-share-button" 
+		                                        data-url="<%= request.url   %>" data-lang="en">Tweet</a>
+		    <div class="g-plusone" data-size="small"></div>
+	    </div>
+	<% end %>
+</div>
+
+
+<div class="two-third last">
+	<% if (current_user)  && (current_user.can?(:edit, @chapter)) %>
+	  <br \><%= link_to "Edit this chapter", edit_chapter_path(@chapter) %> 
+	<% end %>
+	<% if (current_user) && (!@chapter.published) && (current_user.can?(:destroy, @chapter)) && (@chapter.parent != nil)  %>
+	  &nbsp;&nbsp;|&nbsp;&nbsp;
+	  <%= link_to "Delete this chapter", @chapter, 	confirm: 'Are you sure you want to permanently delete this chapter?', method: :delete %>
+	<% end %>
+</div>
+	
+	
+
+
+

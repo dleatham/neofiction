@@ -1,0 +1,44 @@
+<h2> Story Info </h2>
+
+<p>
+  <strong>Title:</strong> <%= @story.title %>
+</p>
+<p>
+  <strong>Desc:</strong>
+  <%= @story.desc %>
+</p>
+<p>
+  <strong>Activity:</strong>
+  <%= @story.activity %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @story.user.name %>
+</p>
+<p>
+  <strong>First Chapter(s)</strong>
+	<table>
+	  <tr>
+	    <th>Heading</th>
+	    <th>Author</th>
+	    <th>Notes</th>
+	    <th>Votes</th>
+	    <th>Sub-Chapters</th>
+	    <th>Record ID</th>
+	  </tr>
+	  <% @story.chapters.each do |chapter| %>
+	  <tr>
+	    <td><%= link_to chapter.heading, chapter_path(  chapter )%> </td>
+	    <td><%= chapter.user.name %></td>
+	    <td><%= chapter.notes %>
+	    <td><%= chapter.vote_cnt %></td>
+	    <td><%= chapter.descendant_ids.count %></td>
+	    <td><%= chapter.id %>
+	  </tr>
+	  <% end %>
+	</table>
+</p>
+<p>
+  <%= link_to "New First Chapter", new_first_chapter_path( @story.id )%>
+</p>

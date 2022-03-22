@@ -1,0 +1,53 @@
+<%= form_for [@chapter] do |f| %>
+  <% if @chapter.errors.any? %>
+    <div class="simple-error">
+      <h6><%= pluralize(@chapter.errors.count, "error") %> found in your entries below:</h6>
+      <ul>
+      <% @chapter.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <strong>Chapter Heading</strong><br />
+    <%= f.text_field :heading, :class => "chapter_heading" %>
+  </p>
+  <p>
+    <strong>Chapter Body:</strong><br />
+    <%= f.text_area :body, :class => "larger-textarea", :id => "chapter-body-text" %>
+  </p>
+
+  <p>
+    <strong>Writer's Notes:</strong> (Please limit yourself to approximately 100 words.)
+    <%= f.text_area :notes, :id => "writers-notes-text" %>
+  </p>
+  <% if !@chapter.published %>
+	  <p>
+	    <strong>Publish:</strong> <%= f.check_box :published %><br />
+	    WARNING:  Once published, a Chapter cannot be "unpublished" or deleted; it can only be edited and updated.  This is because other writers may have added follow-on chapters (both published and unpublished,) and it would be unfair to destroy their efforts.  <strong>You can come back to an unpublished Chapter via the private link in your Profile.</strong>
+	  </p>
+  <% end %>
+  <p><%= f.submit %></p>
+<% end %>
+
+
+
+
+<script type="text/javascript">
+	var info;
+	$(document).ready(function(){
+		var options = {
+			'maxCharacterSize': -2,
+			'originalStyle': 'originalTextareaInfo',
+			'warningStyle' : 'warningTextareaInfo',
+			'warningNumber': 40
+		};
+		$('#chapter-body-text').textareaCount(options);
+		$('#writers-notes-text').textareaCount(options);
+	});
+</script>
+
+
+

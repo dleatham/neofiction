@@ -1,0 +1,35 @@
+
+<h2>Chapter <%= (@level + 1).to_s %></h2>
+
+<div id="child_chapter_links">	
+<% if !@published_children.empty? %>
+    <p>
+    There are <%= @published_children.count %> 'Chapter <%= (@level + 1).to_s %>'s to chose from, rank-ordered by votes:
+	</p>
+	<ul class="chapter-link-list">
+	<% @published_children.each do |c| %>
+	       <% vote_tally = "(Votes for: " + c.votes_for.to_s + "   Votes against: " + c.votes_against.to_s + ")" %>
+	       <li> <%= link_to c.heading, chapter_path( c ) %>
+		      <div class="link-very-small"> <%= vote_tally %> </div>
+	       </li>
+	<% end %>
+    </ul>
+<% else %>
+    <p>None have been written yet.</p>
+<% end %>
+</div>  <!--id="child_chapter_links" -->
+
+<div id="view_nav">	
+<% if @chapter.published && current_user %>
+	  <h6> <%= @create_next_chapter_heading %></h6>
+      <%= link_to "New chapter " + (@level + 1).to_s, new_chapter_path(@chapter),
+                  :class => "button small round blue" %> 
+<% else%>
+    <%= link_to "Sign In", new_user_session_path %>  or <%= link_to "Sign up", new_user_registration_path %> to write your own Chapter <%= (@level + 1).to_s %> for this story!
+    
+<% end %>
+</div>  <!--id="view_nav" --> 
+
+
+
+

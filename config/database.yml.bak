@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: storyapp_development
+  pool: 5
+  username: 
+  password:
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: storyapp_test
+  pool: 5
+  username: 
+  password:
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: storyapp_production
+  pool: 5
+  username: 
+  password:

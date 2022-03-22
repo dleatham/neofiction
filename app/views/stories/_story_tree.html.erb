@@ -1,0 +1,29 @@
+
+
+<h3>Story Tree</h3>
+
+
+<div id="story_tree_list" class="story_tree">
+    <ul>
+        <%= show_story_tree( @root_chapter_subtree ) %>
+    </ul>
+</div>
+
+<script type="text/javascript" class="source">
+
+
+$(function () {
+	$("#story_tree_list").jstree({ 
+		"plugins" : [ "html_data",  "themeroller" ]
+	}).bind("loaded.jstree", function (e, data) { data.inst.open_all(-1); })
+});
+
+
+</script>
+
+
+
+<div class="div-line"></div>
+<div class="div-space-20"> &nbsp; </div>
+
+

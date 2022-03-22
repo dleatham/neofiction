@@ -1,0 +1,35 @@
+<h1>Group</h1>
+
+<p>
+  <strong>Title:</strong>
+  <%= @group.title %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @group.desc %>
+</p>
+
+<h3>Memberships</h3>
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Group Role</th>
+		<th></th>
+	</tr>
+    <% @group.memberships.each do |m| %>
+	<tr>
+	     <td><%= m.user.name %></td>
+	     <td><%= m.group_role %></td>
+	     <td><%= link_to 'Destroy', [ @group, m ], confirm: 'Are you sure?', method: :delete %>
+	</tr>
+    <% end %>
+</table>
+<p>
+	<%= link_to 'Add a member to this group', new_group_membership_path( @group ) %>
+</p>
+
+
+<%= link_to 'Edit', edit_group_path( @group ) %> |
+<%= link_to 'Back', groups_path %>

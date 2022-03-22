@@ -1,0 +1,13 @@
+<p><strong>Hello from neoFICTION! </strong></p>
+
+<p>The neoFICTION account with the email: <%= @resource.email %> has been locked due to an excessive number of unsuccessful sign in attempts.  The account was locked for your protection.</p>
+
+<p>Please click the link below to unlock your account:</p>
+
+<p><%= link_to 'Unlock my account', unlock_url(@resource, :unlock_token => @resource.unlock_token) %></p>
+
+<p>Thanks,</p>
+
+<p><strong>The neoFICTION Team </strong></p>
+
+

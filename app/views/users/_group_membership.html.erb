@@ -1,0 +1,29 @@
+<div class="one">
+<% if !@created_groups.empty? %>
+	<p><strong>Groups Created by <%= @user_name %></strong></p>
+	    <ul>
+	    <% @created_groups.each do |group| %>
+	        <li><%= link_to group.title, group %> (Group ID: <%= group.id %>)</li>
+	    <% end %>
+	    </ul>
+<% end %>
+
+<% if !@member_groups.empty? %>
+	<p><strong>Groups To Which <%= @user_name %> Belong</strong></p>
+	    <ul>
+	    <% @member_groups.each do |group| %>
+	        <li><%= link_to group.title, group %> (Group ID: <%= group.id %>)</li>
+	    <% end %>
+	    </ul>
+<% end %>
+
+   <% if !@memberships.empty? %>
+<p><strong>Group Memberships held by <%= @user_name %> </strong></p>
+	    <ul>
+	    <% @memberships.each do |membership| %>
+	        <li><%= link_to membership.group.title, membership.group %> 
+		        (Membership ID: <%= membership.id %>; Membership Role: <%= membership.group_role %> )</li>
+	    <% end %>
+	    </ul>
+<% end %>
+</div>

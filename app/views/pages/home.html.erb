@@ -1,0 +1,92 @@
+<div class="two-third">
+	<%= render 'site_intro' %>
+</div>
+
+<div class="one-third last">
+	<% if current_user %>
+	    <%= render 'tracking_board'%>
+	<% else %>
+	    <%= render 'site_features' %>
+	<% end %>
+</div>
+
+
+<div class="one">
+	<div class="div-line"></div>
+	<div class="div-space-20"> &nbsp; </div>
+	<div class="one-sixth">
+		<h4><%= link_to "Most Active", active_path %> </h4>
+		<ul class="round-list">
+			<% @active_stories.each do |story| %>
+			      <li> <%= link_to story.title, story_path( story  ) %> (<%= story.activity %>)
+				  <br /> <div class="link-small"> 
+				   &nbsp;&nbsp;&nbsp;&nbsp;by
+				   <%= link_to story.user.name, user_profile_path( story.user )%> 
+				   (<%= story.user.weighted_score %>)</div></li>
+			<% end %>
+		</ul>	
+		<div class="more-link"><%= link_to "(full list)", active_path %></div>
+	</div>
+
+	<div class="one-sixth">
+		<h4><%= link_to "Newest", newest_path %></h4>
+		<ul class="round-list">
+			<% @new_stories.each do |story| %>
+			  <% if story.most_pop_chapter %>
+		        <li> <%= link_to story.title, story_path( story  ) %><br /> <div class="link-small">&nbsp;&nbsp;&nbsp;&nbsp;by
+			    <%= link_to story.user.name, user_profile_path( story.user )%> (<%= story.user.weighted_score %>)</div></li><% end %>
+			<% end %>
+		</ul>
+		<div class="more-link"><%= link_to "(full list)", newest_path %></div>
+	</div>
+
+	<div class="one-sixth">
+		<h4><%= link_to "Top Writers", top_users_path %></h4>
+		<ul class="round-list">
+			<% @top_writers.each do |writer| %>
+			    <li> <%= link_to writer.name, user_profile_path( writer ) %> (<%= writer.popularity_score + writer.activity_score %> )  </li>
+			<% end %>
+		</ul>
+	    <div class="more-link"><%= link_to "(full list)", top_users_path %></div>
+	</div>
+	
+	<div class="one-sixth">
+		<h4><%= link_to "Fan Fiction", genres_path %></h4>
+		<ul class="round-list">
+			<% @fan_fiction_base_genres.each do |bg| %>
+			
+			    <details><summary> <%= link_to bg.title.split(": ").last, genre_path(bg) %>  </summary>
+				  <% if !(bg.children.empty?) %>
+					  <% bg.children_sorted_by_total_stories.each do |g| %>
+					    <br /><span class="genre-sub"><%= link_to g.title, genre_path(g) %> (<%= g.story_count.to_s %>)</span>
+					  <% end %>
+				  <% end%>
+				
+			</details>
+			<% end %>
+		</ul>
+
+	</div>
+	
+	<div class="one-sixth">
+		<h4><%= link_to "Genres", genres_path %></h4>
+		<ul class="round-list">
+			<% @standard_base_genres.each do |bg| %>
+			    <details><summary> <%= link_to bg.title, genre_path(bg) %> (<%= bg.story_count.to_s %>) </summary>
+				  <% if !(bg.children.empty?) %>
+					  <% bg.children_sorted_by_total_stories.each do |g| %>
+					    <br /><span class="genre-sub"><%= link_to g.title, genre_path(g) %> (<%= g.story_count.to_s %>)</span>
+					  <% end %>
+				  <% end%>
+				
+			</details>
+			<% end %>
+		</ul>
+
+	</div>
+	
+</div>
+
+
+
+

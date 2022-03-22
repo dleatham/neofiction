@@ -1,0 +1,25 @@
+
+<%= render "story_info" %>
+
+<div class="div-line"></div>
+
+<div class="one">
+	<div class="two-third">
+		<%= render "chapter_header" %>
+
+		<%= render "current_chapter" %>
+		
+		<% if @chapter.published %>
+		    
+		    <div class="div-line"></div>
+
+		    <%= render "comments" %>
+		<% end %>
+	</div>
+	
+	<% if @chapter.published %>
+		<div class="one-third last">
+			<%= render "next_chapter" %>
+		</div>
+	<% end %>
+</div>

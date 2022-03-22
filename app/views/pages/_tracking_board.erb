@@ -1,0 +1,22 @@
+<h3>You Are Tracking:</h3>
+
+<div class="one-sixth">
+<h5>Stories</h5>
+    <ul class="round-list">
+	    <% @tracked_stories.each do |story|%>
+          <%= render story %>
+        <% end %>
+    </ul>
+    <div class="more-link"> <%= link_to "(all tracked)", user_profile_path( current_user ) %> </div>
+</div>
+
+<div class="one-sixth">
+<h5>Chapters</h5>
+    <ul class="round-list">
+	    <% @tracked_chapters.each do |chapter|%>
+          <%= render chapter %>
+        <% end %>
+    </ul>
+    <div class="more-link"> <%= link_to "(all tracked)", user_profile_path( current_user ) %> </div>
+
+</div>   

@@ -1,0 +1,21 @@
+<p><strong>Welcome to neoFICTION!</strong></p>
+
+<p>You have signed up at www.neoFICTION.com using this email address:  <%= @resource.email %>  </p>
+
+<p>You can confirm your account by clicking the link below:</p>
+
+<p><%= link_to 'Confirm my neoFICTION account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+
+<p>Once you confirm your account, you will be able to:</p>
+<ul>
+<li>Vote for your favorite stories and chapters</li>
+<li>Comment on stories and chapters</li>
+<li>Start your own story</li>
+<li>Write chapters for other member's stories</li>
+</ul>
+
+<p>neoFICTION' unique community approach to writing and refining stories is creating some of the most interesting fiction anywhere on the World Wide Web.  We are excited that you have joined the team and look forward to your contributions.</p>
+
+<p>Thank you,</p>
+
+<p><strong>neoFICTION Team</strong></p>

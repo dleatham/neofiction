@@ -1,0 +1,17 @@
+<div class="vote-buttons">
+	<strong>Votes: </strong>&nbsp; &nbsp;
+	+ <%= @chapter.votes_for %> &nbsp; &nbsp; &nbsp; - <%= @chapter.votes_against %>
+  &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;<br />
+  <% if !current_user %>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <%= link_to "Sign In", new_user_session_path %>  or <%= link_to "Sign up", new_user_registration_path %> to vote/comment on this chapter!
+  <% elsif current_user.voted_for?(@chapter) %>
+    &nbsp;&nbsp;&nbsp;&nbsp;You voted for this chapter!
+  <% elsif current_user.voted_against?(@chapter) %>
+    &nbsp;&nbsp;&nbsp;&nbsp;You voted against the chapter!
+  <% else %>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <%= link_to "Vote FOR  ", vote_for_path(@chapter) %> &nbsp;&nbsp;|&nbsp;&nbsp;
+    <%= link_to "Vote AGAINST", vote_against_path(@chapter) %>
+  <% end %>
+ </div>

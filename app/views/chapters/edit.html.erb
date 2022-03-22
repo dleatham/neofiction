@@ -1,0 +1,20 @@
+<h4>Edit/Update a Chapter</h4>
+
+<div class="one-half">
+	<p>
+		As you write this chapter, be sure to review the Introduction and Guidance provided by the Story Idea creator.  Also, your fellow writers will appreciate being able to understanding your thought process as recorded in the "Notes" below.
+	</p>
+
+<%= render 'form' %>
+
+<p>
+  <%= link_to "Back", :back %>
+</p>
+</div>
+
+<div class="one-half last">
+	<% if @story %>
+	   <h6>Story Idea - Introduction and Guidance:</h6>
+	   <%= simple_format @story.desc %>
+	<% end %>
+</div>

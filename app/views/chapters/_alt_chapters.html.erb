@@ -1,0 +1,25 @@
+	<% if current_user %>
+	  <h4>Think you can do it better?  Write your own Chapter <%= @level %>!</h4>
+	  <% if @level != 1 %>
+		  <%= link_to "Create an Alternative Chapter " + @level.to_s, new_chapter_path(@chapter.parent),
+		              :class => "button small round blue" %> 
+	  <% else %>
+	  <%= link_to "Create an Alternative Chapter " + @level.to_s, new_first_chapter_path(@chapter.story),
+	              :class => "button small round blue" %> 
+	  <% end %>
+	<% end %>
+
+
+
+	<div id="sibling_chapter_links">
+	<% if !@published_siblings.empty? %>
+    
+	<br><h4>Some other "Chapter <%= @level %>"s to read:</h4>
+		<ul class="chapter-link-list">
+		<% @published_siblings.each do |s| %>
+		    <% vote_tally = "(Votes for: " + s.votes_for.to_s + "   Votes against: " + s.votes_against.to_s + ")" %>
+		    <li> <%= link_to s.heading, chapter_path( s ) %> <div class="link-very-small"><%= vote_tally %></div> </li>
+		<% end %>
+	    </ul>
+	<% end %>
+	</div>  <!--id="sibling_chapter_links" -->

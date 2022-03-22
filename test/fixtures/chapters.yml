@@ -1,0 +1,13 @@
+one:
+  heading: MyString
+  body: MyText
+  notes: MyText
+  votes: 1
+  published: false
+
+two:
+  heading: MyString
+  body: MyText
+  notes: MyText
+  votes: 1
+  published: false

@@ -1,0 +1,17 @@
+<h3>A Collaborative Approach Produces the Best Fiction</h3>
+
+<p>neoFICTION facilitates collaboratively written fiction, unfettered by traditional, linear thinking.  Stories can branch, expand, and flow based on community talent, wisdom, and tastes.  Your fellow writers add to your stories, and you contribute to theirs.  The community members help shape and refine the stories through votes, comments, and alternative chapters and endings.  Through the joint effort of our members, neoFICTION's unique writing platform produces the web's best community-vetted fiction.</p>
+
+<p>Explore our most active and fresh stories by clicking on the story links below.  <%= @call_to_action %>  Please join in and help us create a style of creative and innovative fiction that is totally unique!</p>
+
+To get started,
+
+<% if current_user %>
+     click on a story title below or start your own story:&nbsp;&nbsp;&nbsp;
+    <%= link_to("Start your own story", new_story_path, :class => "button small round blue") %>
+<% else %>
+     sign up or sign in!  Or just click on a story title below.<br /><br />
+    <%= link_to "Sign up", new_user_registration_path, :class => "button small round blue" %> &nbsp;&nbsp;&nbsp;
+    <%= link_to "Sign in", new_user_session_path, :class => "button small round blue" %> 
+<% end %>
+

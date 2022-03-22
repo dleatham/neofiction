@@ -1,0 +1,115 @@
+<%= form_for(@story) do |f| %>
+  <%= fields_for @chapter do |c|%>
+
+  	<% if @story.errors.any? %>
+      <div class="simple-error">
+		  <h2><%= pluralize(@story.errors.count, "error") %> found in your entries below:</h2>
+	      <ul>
+	      <% @story.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	
+	<div class="one">
+		  <h4>Creating/Editing a New Story Idea</h4>
+		  <p>As the creator of a Story Idea, you have the opportunity to set the vision and start it off with a great first chapter.</p>  
+		  <p>Remember, neoFICTION stories are different.  There will be many contributors to this story, but as the creator of the Story Idea you get to "set the stage." Here is where you can provide high-level guidance and instructions for others who will help write this story, but remember that very detailed and exacting direction can kill creativity.  </p>
+		<p>Your first chapter needs to be immediately interesting and engaging as you set the style and tone for others to follow.  Long, drawn-out opening chapters don't encourage others to contribute.  Brief, intense, and open-ended first chapters grab other writer's interest and imagination.  (If you feel the need for a longer set up, consider adding a second chapter to provide the additional "staging".)
+		</p>
+	</div>
+	
+	<div class="div-line"></div>
+	<div class="div-space-20"> &nbsp; </div>
+	
+	<div class="one">
+        <div class="one-half">
+	      <h4>Story Idea</h4>
+	      <p></p>
+		
+		<p>
+			<strong>Story Title</strong><br />
+	        <%= f.text_field :title, :class => "title-textarea" %>
+	    </p>
+	    
+		  <p>
+		    <strong>Story Creator's Introduction and Guidance</strong><br />
+		    <%= f.text_area :desc, :class => "larger-textarea", :id => "intro-text" %>
+		  </p>
+
+	    <h4>Story Genre</h4>
+	    <p>
+		We have many genre categories to choose from.  Be sure to select the genre that best matches your story idea.  If you do not see an exact match, select one of the "general" categories. Hover your mouse over a genre to see a short description.
+		</p>
+
+		<% @base_genres.each do |bg| %>
+		        <% bg.children.empty? ? suffix = "" : suffix = " (general) "%>
+		        <div>
+		            <span class="genre-base" title="<%= bg.desc%>">
+		                <%= f.radio_button( :genre_id, bg.id)%><%= bg.title + suffix %>
+		            </span>
+			        <% bg.children.each do |g| %>
+			            <span class="genre-sub" title="<%= g.desc%>">
+			                <%= f.radio_button( :genre_id, g.id, :class => "genre-sub"  )%><%= g.title %>
+			            </span>
+			        <% end %>
+			    </div>
+		<% end %>
+
+	</div>  <!-- class="one-half" -->
+
+
+		<div class="one-half last">
+		  <h4>Chapter 1: </h4>
+		  <p>
+		    <strong>Chapter Heading</strong><br />
+		    <%= c.text_field :heading, :class => "title-textarea" %>
+		  </p>
+		  <p>
+		    <strong>Chapter Body</strong>
+		    <%= c.text_area :body, :class => "larger-textarea", :id => "chapter-body-text" %>
+		  </p>
+		  <p>
+		    <strong>Chapter Writer's Notes/Explanations</strong>
+		    <%= c.text_area :notes, :class => "medium-textarea", :id => "chapter-notes-text" %>
+		  </p>
+		  
+	    </div>  <!-- class="one-half" -->
+	
+      	<div class="div-line"></div>
+		<div class="div-space-20"> &nbsp; </div>
+		
+		<div class="one-half last">
+			<% if !@story.published %>
+			  <p>
+			    <strong>Publish: <%= f.check_box :published %></strong><br />
+			    WARNING:  Once published, a Story Idea cannot be
+			    "unpublished" or deleted; it can only be edited and updated.  This is because other writers may have added chapters (both published and unpublished) to this Story Idea, and it would be unfair to destroy their efforts.  (You can come back to an unpublished Story Idea via the private link in your Profile.)
+			  </p>
+		  <% end %>
+		  <p><%= f.submit "Save Story and Chapter Info" %></p>
+		</div>
+	
+	</div>  <!-- class="one" -->
+  <% end %>
+<% end %>
+
+
+
+<script type="text/javascript">
+	var info;
+	$(document).ready(function(){
+		var options = {
+			'maxCharacterSize': -2,
+			'originalStyle': 'originalTextareaInfo',
+			'warningStyle' : 'warningTextareaInfo',
+			'warningNumber': 40
+		};
+		$('#chapter-body-text').textareaCount(options);
+		$('#intro-text').textareaCount(options);
+		$('#chapter-notes-text').textareaCount(options);
+	});
+</script>
+
+

@@ -1,0 +1,13 @@
+<h4>New Chapter</h4>
+
+<div class="one-half">
+
+<%= render 'form' %>
+
+<p><%= link_to "Back", :back %></p>
+</div>
+
+<div class="one-half last">
+	<h6>Story Author's Introduction and Guidance:</h6>
+	<%= simple_format @story.desc %>
+</div>

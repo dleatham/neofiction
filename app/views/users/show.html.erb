@@ -1,0 +1,62 @@
+<h1>User Information</h1>
+
+<p>
+  <strong>Email:</strong>  <%= @user.email %>
+</p>
+
+<p>
+    <strong>Name:</strong>  <%= @user.name %>
+</p>
+
+<p>
+    <strong>Activity Score:</strong>  <%= @user.activity_score %>
+</p
+
+<p>
+    <strong>Roles Mask:</strong>  <%= @user.roles_mask %>    
+</p>
+
+<p>
+    <strong>Roles:</strong>  <%= @user.roles.to_s.humanize %>    
+</p>
+
+<p>
+    <strong>System ID:</strong>  <%= @user.id.to_s.humanize %>    
+</p>
+
+<p><strong>Stories Created by <%= @user.name %></strong></p>
+    <ul>
+    <% @stories.each do |story| %>
+        <li><%= link_to story.title, story %> (Story ID: <%= story.id %>)</li>
+    <% end %>
+    </ul>
+
+<p><strong>Groups Created by <%= @user.name %></strong></p>
+    <ul>
+    <% @created_groups.each do |group| %>
+        <li><%= link_to group.title, group %> (Group ID: <%= group.id %>)</li>
+    <% end %>
+    </ul>
+
+<p><strong>Groups To Which <%= @user.name %> Belongs</strong></p>
+    <ul>
+    <% @member_groups.each do |group| %>
+        <li><%= link_to group.title, group %> (Group ID: <%= group.id %>)</li>
+    <% end %>
+    </ul>
+
+<p><strong>Group Memberships held by <%= @user.name %> </strong></p>
+    <ul>
+    <% @memberships.each do |membership| %>
+        <li><%= link_to membership.group.title, membership.group %> 
+	        (Membership ID: <%= membership.id %>; Membership Role: <%= membership.group_role %> )</li>
+    <% end %>
+    </ul>
+
+
+<% if @user == current_user %>
+  <%= link_to 'Edit Profile', edit_profile_path %> ||
+<% end %> 
+
+<%= link_to 'Back', :back %>
+

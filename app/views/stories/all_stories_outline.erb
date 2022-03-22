@@ -1,0 +1,53 @@
+<h1> All Stories </h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Desc</th>
+    <th>Activity</th>
+    <th>Author</th>
+    <th>Chapters</th>
+  </tr>
+
+<% for story in @stories %>
+<tr>
+  <td><%= story.title %></td>
+  <td><%= story.desc %></td>
+  <td><%= story.activity %></td>
+  <td><%= story.user.name %></td>
+  <td><%= link_to "Show", a_story_path( story ) %></td>
+</tr>
+<tr>
+  <td>
+  <% for chapter in story.chapters %>
+    <ul>
+      <li> 1st chapter in the  story: <%= link_to chapter.heading, user_chapter_path(chapter.user, chapter) %> [chptr:<%= chapter.id %>] </li>
+      <li>
+	    <ul>
+		  <% for child_chapter in chapter.children %>
+		    <li> Second Level: <%= link_to child_chapter.heading, user_chapter_path(child_chapter.user, child_chapter) %>  [chptr:<%= child_chapter.id %>]   </li>
+		    <li>
+			  <ul>
+				<% for gchild_chapter in child_chapter.children %>
+				  <li> Third Level: <%= link_to gchild_chapter.heading, user_chapter_path(gchild_chapter.user, gchild_chapter) %>  [chptr:<%= gchild_chapter.id %>]   </li>
+				  <li>
+					<ul>
+						<% for ggchild_chapter in gchild_chapter.children %>
+						  <li> Forth Level: <%= link_to ggchild_chapter.heading, user_chapter_path(ggchild_chapter.user, ggchild_chapter) %>  [chptr:<%= ggchild_chapter.id %>]    </li>
+						<% end %>
+					</ul>
+				  </li>
+				<% end %>
+			  </ul>
+			</li>
+		  <% end %>
+		</ul>
+	  </li>
+    </ul>
+  <% end %>
+  </td>
+</tr>
+<% end  %>
+</table>
+
+

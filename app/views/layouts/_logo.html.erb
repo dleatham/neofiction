@@ -1,0 +1,19 @@
+<!--Site logo --> 
+<div class="main-logo">
+<%= link_to '<span class="neo-style">neo</span><span class="fiction-style">FICTION</span>'.html_safe, root_path %>
+
+</div>
+
+<div id="main_navigation" class="main-menu ">
+	<ul>
+		<li><%= link_to "Home", root_path %></li>
+		<li><%= link_to "Writers", writers_path %></li>
+		<li><%= link_to "Readers", readers_path %></li>
+		<li><%= link_to "News", news_path %></li>
+		<% if current_user %>
+		    <li> <%= link_to  "Profile", user_profile_path( current_user ) %></li>
+		<% end %>
+			
+	</ul>
+</div>
+<!--End Site logo --> 

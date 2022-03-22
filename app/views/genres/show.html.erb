@@ -1,0 +1,100 @@
+<h3> Genre: <%= @genre.title %></h3>
+
+<p>
+  <strong>Description:</strong>
+  <%= @genre.desc %>
+</p>
+
+<p>
+  <strong>Story Count:</strong>
+  <%= @genre.story_count.to_s %>
+</p>
+
+<% if @genre.is_base_genre? %>
+	<p>
+	  <strong>Total Stories:</strong>
+	  <%= @genre.story_count.to_s %> (includes stories belonging to sub-genres)
+	</p>
+	
+<% end %>
+
+<p>
+	<% if (@genre.is_base_genre?) && (@user.can?(:create, @genre)) %> 
+	  (<%= link_to " New Sub-Genre ", new_genre_path( :parent_id => @genre.id) %>)
+	<% end %>
+	<% if @user.can? :edit, @genre %> 
+	  (<%= link_to " Edit ", edit_genre_path( @genre ) %>)
+	<% end %>
+	<% if @user.can? :destroy, @genre %> 
+	  (<%= link_to " Delete ", genre_path( @genre ), :method => :delete, :confirm => "Are you sure?" %>)
+	<% end %>	
+</p>
+
+
+
+<% if @genre.is_base_genre? && !(@genre.children.empty?)  %>
+  <br /> <div class="div-line"></div> <br />
+  <h4>Sub-Genres</h4>
+
+  <ol >
+	<% if !(@genre.ancestors.empty?) %>
+		<% @genre.ancestors.each do |ancestor| %>
+		  <li><%= link_to ancestor.title, ancestor %> (<%= ancestor.story_count.to_s %>)</li> 
+	    <% end %>
+    <% end %>
+    <li><strong><%= @genre.title %></strong>
+		<% if @user.can? :create, @genre %> 
+		  (<%= link_to "New Sub-Genre", new_genre_path( :parent_id => @genre.id) %>)
+		<% end %>
+	</li>
+	<% if !(@genre.children.empty?) %>
+      <ul class="basic-list">
+		<% @genre.children_sorted_by_total_stories.each do |child| %>
+		  <li><%= link_to child.title, child %> (<%= child.story_count.to_s %>) </li>
+	    <% end %>	
+	  </ul>
+	<% end %>
+  </ol>
+<% elsif @genre.is_sub_genre? %>
+  <br /> <div class="div-line"></div> <br />
+  <h4>Belongs To General Genre Category</h4>
+  <%= link_to @genre.parent.title, @genre.parent %>
+<% else %>
+
+<% end %>
+
+<br /> <div class="div-line"></div> <br />
+
+<p>
+	Below are a list of stories for this genre - please select one to read.   
+<% if current_user %>
+    Or create a new story yourself!&nbsp;&nbsp;&nbsp;
+    <%= link_to("Start your own story", new_story_path, :class => "button small round blue") %>
+<% end %>
+</p>
+
+<br /><br />
+
+<%= paginate @stories %>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Author's Introduction</th>
+    <th>Activity</th>
+    <th>Total Chapters</th>
+  </tr>
+
+<% for story in @stories %>
+<tr>
+  <td><%= link_to story.title, chapter_path( story.most_pop_chapter(current_user)  ) %></td>
+  <td><%= link_to story.user.name, user_profile_path( story.user ) %></td>
+  <td><%= simple_format story.desc.truncate(200, :separator => ' ') %></td>
+  <td><%= story.activity %></td>
+  <td><%= story.total_published_chapters %></td>
+</tr>
+<% end  %>
+</table>
+<%= paginate @stories %>
+
+

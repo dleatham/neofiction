@@ -1,0 +1,24 @@
+<h1> All Stories </h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Desc</th>
+    <th>Activity</th>
+    <th>Author</th>
+    <th>Chapters</th>
+  </tr>
+
+<% for story in @stories %>
+<tr>
+  <td><%= story.title %></td>
+  <td><%= story.desc %></td>
+  <td><%= story.activity %></td>
+  <td><%= story.user.name %></td>
+  <td><%= link_to "Show", a_story_path( story ) %></td>
+</tr>
+
+<% end  %>
+</table>
+
+

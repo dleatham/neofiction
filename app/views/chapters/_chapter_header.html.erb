@@ -1,0 +1,24 @@
+<div class="two-third last">
+	<div id="parent_link">
+		<p>
+		  <% if !(@chapter.is_root?) %>
+		    <%= link_to "<< Previous Chapter", chapter_path( @parent )%>
+		  <% end %>
+		</p>
+	</div> <!--id="parent_link" -->
+
+	<h2> Chapter <%= @level %> : <%= @chapter.heading %> </h2>
+</div>
+
+<div class="one-third">
+		Written by: <%= link_to @chapter.user.name, user_profile_path(@chapter.user) %> &nbsp;
+</div>
+
+<div class="one-third last">
+	Writer's Notes:&nbsp;&nbsp;
+    <% if !(@chapter.notes == nil) %>
+		<a href="#" class="tt"><%=  @chapter.notes.truncate(40, :separator => ' ') %>
+			<span class="overlay"><%=  simple_format @chapter.notes %></span>
+		</a>
+	<% end %>
+</div>

@@ -1,0 +1,61 @@
+
+<h4>Update your profile information:</h4>
+
+<%= form_for(@user, :url => update_profile_path(@user)) do |f| %>
+  <% if @user.errors.any? %>
+    <div class="simple-error">
+      <h6><%= pluralize(@user.errors.count, "error") %> found in your entries below:</h6>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <br />
+  <div class="field">
+    <h6><%= f.label :name, "Name (how you are known on this site):" %></h6>
+    <p><%= f.text_field :name %></p>
+  </div><br />
+
+  <div class="field">
+    <h6><%= f.label :blog_url, "URL to your own blog or webpage (you must include http:// ): " %></h6>
+    <p><%= f.text_field :blog_url %></p>
+  </div><br />
+
+  <div class="field">
+    <h6><%= f.label :bio, "Author's Bio (short introduction to yourself for neoFICTION readers):" %></h6>
+    <p><%= f.text_area :bio, :class => "larger-textarea" %><p>
+  </div><br />
+
+
+
+<% if @admin %>
+  <div class="field">
+    <%= f.label :activity_score, 'Activity Score:' %><br />
+    <%= f.number_field :activity_score %>
+  </div>
+
+  <div class="field">
+    <%= f.label :roles_mask, "Roles Mask:" %><br />
+    <%= f.number_field :roles_mask %>
+  </div>
+	 <p>
+	  <%= f.label :roles %><br />
+	  <% for role in User::ROLES %>
+	    <%= check_box_tag "user[roles][]", role, @user.roles.include?(role) %>
+	    <%=h role.humanize %><br />
+	  <% end %>
+	  <%= hidden_field_tag "user[roles][]", "" %>
+	  </p>
+<% end # if @admin %>
+
+
+
+  <div class="actions">
+    <%= f.submit "Save"%>
+  </div>
+
+<% end %>

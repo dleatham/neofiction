@@ -1,0 +1,14 @@
+<div class="one">
+	<div class="two-third">
+		<div class="lead-in-text">
+			Story Idea by: <%= link_to @story.user.name, user_profile_path(@story.user)%><br />
+		</div>
+	    <h1><%= link_to @story.title, story_path( @chapter.story ) %></h1>
+    </div>
+	<div class="one-third last">
+		<div class="lead-in-text">
+		   Genre: <br />
+		</div>
+		<h3><%= @story.genre.title_extended %></h3>
+	</div>
+</div>

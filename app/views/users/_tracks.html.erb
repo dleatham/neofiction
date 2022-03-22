@@ -1,0 +1,18 @@
+<p><strong>Stories Being Tracked by <%= @user_name %></strong></p>
+<ul>
+    <% @tracked_stories.each do |story|%>
+      <%= render story %>
+      <div class="div-line"></div>
+    <% end %>
+</ul>
+
+<p><strong>Chapters Being Tracked by <%= @user_name %></strong></p>
+<ul>
+	<% @tracked_chapters.each do |chapter| %>
+      <%= render chapter %>
+      <div class="div-line"></div>
+    <% end %>
+</ul>
+
+
+

@@ -1,0 +1,42 @@
+<h1>Top Writers</h1>
+
+<div class="one-third">
+
+<h3>Most Active Writers</h3>
+
+<div id="user_table">
+	<table class="listing">
+	  <tr>
+	    <th>name</th>
+	    <th>Activity Score</th>
+	  </tr>
+	  <% for user in @most_active %>
+	    <tr>
+	      <td><%= link_to user.name, user_profile_path(user)  %></td>
+	      <td><%= user.activity_score %></td>
+	    </tr>
+	  <% end %>
+	</table>
+</div>
+</div>
+
+
+<div class="one-third last">
+
+<h3>Most Popular Writers</h3>
+
+<div id="user_table">
+	<table class="listing">
+	  <tr>
+	    <th>name</th>
+	    <th>Popularity Score</th>
+	  </tr>
+	  <% for user in @most_popular %>
+	    <tr>
+	      <td><%= link_to user.name, user_profile_path(user)  %></td>
+	      <td><%= user.popularity_score %></td>
+	    </tr>
+	  <% end %>
+	</table>
+</div>
+</div>

@@ -1,0 +1,32 @@
+
+    <%= render "story_header" %>
+
+<div class="two-third">
+
+    <%= render "story_info" %>    
+
+</div>  
+
+<div class="one-third last">
+	
+	<%= render "story_attributes" %>    
+		
+</div>
+
+
+<div class="two-third" >
+<div class="div-line"></div>
+<div class="div-space-20"> &nbsp; </div>
+
+    <%= render "story_tree" %>    
+
+    <% if @story.published %>
+        <% if current_user %>
+          <%= track_options( current_user, @story ) %>
+		  <div class="div-line"></div>
+		  <div class="div-space-20"> &nbsp; </div>
+        <% end %>
+        <%= render "story_comments" %>    
+    <% end %>
+
+</div>

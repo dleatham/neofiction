@@ -1,0 +1,18 @@
+<h1>Genres</h1>
+
+	<ul class="round-list">
+		<% @genres.each do |bg| %>
+		    <li> <strong><%= link_to bg.title, genre_path(bg) %></strong> (<%= bg.total_stories.to_s %>) <br />
+			  <% if !(bg.children.empty?) %>
+				  <% bg.children_sorted_by_total_stories.each do |g| %>
+				    &nbsp;&nbsp;&nbsp;<%= link_to g.title, genre_path(g) %> (<%= g.total_stories.to_s %>)
+				  <% end %>
+			  <% end%>
+			</li>
+		<% end %>
+	</ul>
+
+
+
+
+

@@ -1,0 +1,27 @@
+<h4>Comments on this story:</h4>
+
+<% if current_user && @story.published %>
+	<p><strong>What do you think of this story?  Let the writers know!</strong></p>
+	<%= form_for @comment, :url => { :controller => "stories", :action => "update_comment"} do |f| %>
+	        <%= f.hidden_field :user_id, :value => current_user.id %>
+			Comment Title: <%= f.text_field :title %><br>
+			<%= f.label :body, "Comment" %>
+			<%= f.text_area :body %>
+	  <div class="actions">
+	    <%= f.submit "Submit Comment", :class => "button small round blue"  %>
+	  </div>
+	<% end %>
+<% elsif @story.published %>
+	  <%= link_to "Sign In", new_user_session_path %>  or <%= link_to "Sign up", new_user_registration_path %> to comment on this story!
+<% end %>
+
+<% if @story.published %>
+<div id="comments">
+	<% for comment in @story_comments %>
+	    <div class="div-line"></div>
+	    <%= nested_comments comment.subtree.arrange(:order => :created_at) %>
+	<% end %>
+	<%= paginate @story_comments %>
+</div>
+<br><br>
+<% end %>

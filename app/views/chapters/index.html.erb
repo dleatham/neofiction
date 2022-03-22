@@ -1,0 +1,27 @@
+<h1> All My Chapters </h1>
+
+<h3>Written by: <%= @user.name %> </h3>
+<div = id="chapter_table">
+<table class="listing">
+  <tr>
+    <th>Heading</th>
+    <th>Body</th>
+    <th>Notes</th>
+    <th>Votes</th>
+    <th>Published</th>
+  </tr>
+
+<% for chapter in @chapters %>
+<tr>
+   <td><%= chapter.heading %></td>
+   <td><%= chapter.body %></td>
+   <td><%= chapter.notes %></td>
+   <td><%= chapter.vote_cnt %></td>
+   <td><%= chapter.published %></td>
+   <td><%= link_to "Show", chapter_path( chapter ) %></td>
+ </tr>
+
+<% end %>
+
+</table>
+</div>

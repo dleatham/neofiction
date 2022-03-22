@@ -1,0 +1,15 @@
+<!--Begin User sign_in/sign_up/sign_out --> 
+<div class="simple-nav li">  
+    <ul>
+	  <% if user_signed_in? %>  
+	    <li>Signed in as: <strong><%= link_to current_user.name, user_profile_path( current_user ) %></strong>  </li>
+	    <li>using email:  <%= current_user.email %></li>
+	    <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete  %>  </li>
+	  <% else %>  
+	    <li>Want to join? <%= link_to "Sign up", new_user_registration_path %></li> 
+	    <li>Already a member?<%= link_to "Sign in", new_user_session_path %><li>
+	  <% end %>  
+    </ul>
+</div>
+
+<!--End User sign_in/sign_up/sign_out --> 

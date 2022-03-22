@@ -1,0 +1,22 @@
+<!--Begin Flash --> 
+
+<div id="flash">
+  <% if flash[:notice] %>
+    <div class="simple-notice">
+	<%= flash[:notice] %>
+	</div>
+  <% end %>
+  <% if flash[:alert] %>
+    <div class="simple-info">
+	<%= flash[:alert] %>
+	</div>
+  <% end %>	
+  <% if flash[:error] %>
+    <div class="simple-error">
+	<%= flash[:error] %>
+	</div>
+  <% end %>	
+</div>
+
+<!--End Flash --> 
+
